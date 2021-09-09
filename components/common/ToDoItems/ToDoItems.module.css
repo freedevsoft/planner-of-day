@@ -1,0 +1,41 @@
+.container {
+  @apply bg-white w-full h-1/3screen mt-4 overflow-y-auto rounded-t;
+}
+
+.scrollY {
+  /* for Firefox */
+  scrollbar-width: thin;
+
+  @apply overflow-auto w-full;
+}
+
+.toDoItemFooter {
+  @apply bg-white flex justify-between p-4 text-gray-500 rounded-b;
+}
+
+.clearButton {
+  @apply capitalize;
+}
+
+.clearButton:hover,
+.clearButton:focus {
+  @apply bg-clip-text font-semibold text-transparent bg-gradient-to-r from-lightskyblue to-mediumorchid outline-none;
+}
+
+/* for Chrome and others based in -webkit */
+.scrollY::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+.scrollY::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-md;
+}
+
+.scrollY::-webkit-scrollbar-thumb:hover,
+.scrollY::-webkit-scrollbar-thumb:active {
+  @apply bg-gradient-to-r from-lightskyblue to-mediumorchid shadow;
+}
+
+.scrollY::-webkit-scrollbar-track {
+  @apply bg-gray-200 rounded-md;
+}
