@@ -11,6 +11,7 @@
     "format": "prettier --write . --config ./.prettierrc"
   },
   "dependencies": {
+    "@popperjs/core": "^2.10.1",
     "chart.js": "^3.5.1",
     "immutability-helper": "^3.1.1",
     "js-cookie": "^2.2.1",
@@ -19,6 +20,8 @@
     "react": "17.0.1",
     "react-chartjs-2": "^3.0.4",
     "react-dom": "17.0.1",
+    "react-feather": "^2.0.9",
+    "react-popper": "^2.2.5",
     "react-sortablejs": "^6.0.0",
     "sharp": "^0.26.3",
     "sortablejs": "^1.12.0"

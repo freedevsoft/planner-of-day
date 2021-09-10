@@ -103,10 +103,10 @@ const ToDoContext: Context<ToDoState | any> = createContext(initialState);
 const ToDoProvider: FC = (props) => {
   const [state, dispatch] = useReducer(toDoReducer, initialState);
 
-  const addToDo = (toDo: string): any =>
+  const addToDo = (toDo: string, date: Date): any =>
     dispatch({
       type: 'ADD_TO_DO_ITEM',
-      payload: { id: new Date().getTime(), task: toDo, isDone: false, day: new Date().toString(), startTime: "", endTime: "" },
+      payload: { id: new Date().getTime(), task: toDo, isDone: false, day: date.toString(), startTime: "", endTime: "" },
     });
   const changeToDo = (item : ToDoItemModel): any =>
     dispatch({

@@ -8,12 +8,18 @@ import TimeAssign from '../TimeAssign';
 
 interface Props {
   onLoadData?: any;
+  date?: Date;
 }
-
+const formatedDate = (date : string | undefined) : string | undefined => {
+  return date?.slice(0, 15);
+} 
 const ToDoItems: FC<Props> = (props) => {
-  const { onLoadData } = props;
+  const { onLoadData, date } = props;
   const { toDoItems, view, clearToDoCompleted, sortToDoItems, changeToDo } = useToDo();
-  onLoadData(toDoItems);
+  // onLoadData(toDoItems);
+  useEffect(() => {
+    onLoadData(toDoItems.filter( (item : ToDoItemModel) => formatedDate(item.day) === formatedDate(date?.toString())))
+  }, [toDoItems, date])
   const [ data, setData ] = useState<ToDoItemModel>();
   const handleToDoToShow = useCallback(
     (value: View) => {
@@ -38,9 +44,8 @@ const ToDoItems: FC<Props> = (props) => {
     handleToDoToShow(view);
     return (): any => handleToDoToShow(view);
   }, [handleToDoToShow, view]);
-
-  const toDoItemsToShow = handleToDoToShow(view);
-
+  
+  const toDoItemsToShow = handleToDoToShow(view).filter( (item : ToDoItemModel) => formatedDate(item.day) === formatedDate(date?.toString()));
   const showItemsLeft = toDoItems.filter((toDoItem: ToDoItemModel) => toDoItem.isDone === false).length;
   
   const handleChangeTime = (item: ToDoItemModel) => {
@@ -49,7 +54,6 @@ const ToDoItems: FC<Props> = (props) => {
   const handleClickTimeAssign = ( toDo : ToDoItemModel) => {
     setData(toDo);
   }
-  console.log(toDoItems);
   return (
     <>
       <ReactSortable

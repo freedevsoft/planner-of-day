@@ -47,15 +47,11 @@ const TimeBreakDown: FC<Props> = (props) => {
         }
       }).filter(item =>  item !== undefined))
     }
+    else{
+      setData([]);
+      setLabels([]);
+    }
   }, [toDoItems, setLabels, setData])
-  console.log("chart data",toDoItems, {
-    labels: labels,
-    datasets: [{
-      data: data,
-      backgroundColor: colors,
-      hoverBackgroundColor: hoverColors
-    }]
-  });
   return (
     <div>
       <button
@@ -87,6 +83,7 @@ const TimeBreakDown: FC<Props> = (props) => {
             </div>
             
             <div className="relative p-4 flex-auto">
+              { labels.length === 0 ? "There is nothing to show!" :
               <Pie
                 data={{
                   labels: labels,
@@ -96,7 +93,7 @@ const TimeBreakDown: FC<Props> = (props) => {
                     hoverBackgroundColor: hoverColors
                   }]
                 }}
-              />
+              />}
             </div>
             
             <div className="flex items-center justify-end p-3 border-t border-solid border-gray-200 rounded-b">
