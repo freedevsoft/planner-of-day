@@ -5,31 +5,11 @@
 ## 🔥 Table of Contents
 
 - [Overview](#overview)
-  - [Built With](#built-with)
+- [Built With](#built-with)
 - [Features](#features)
 - [How to use](#how-to-use)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
-
-<!-- OVERVIEW -->
-
-## Overview
-
-<details>
-  <summary>💻 Desktop version</summary>
-    
-  ![screenshot](src/images/desktop-version.png)
-  ![screenshot](src/images/desktop-version2.png)
-
-</details>
-
-<details>
-  <summary>📱 Mobile version</summary>
-
-![screenshot](src/images/mobile-version.png)
-![screenshot](src/images/mobile-version2.png)
-
-</details>
 
 ## Built With
 
