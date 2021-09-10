@@ -1,5 +1,4 @@
-import { ChangeEvent, FC, InputHTMLAttributes, KeyboardEvent, useEffect, useState } from 'react';
-import { useToDo } from '@components/context/context';
+import { ChangeEvent, FC, InputHTMLAttributes, useEffect, useState } from 'react';
 
 interface Props extends InputHTMLAttributes<HTMLSelectElement> {
   className?: string;
@@ -10,7 +9,6 @@ interface Props extends InputHTMLAttributes<HTMLSelectElement> {
 
 const TimePicker: FC<Props> = (props) => {
   const {value, onTimeChange} = props;
-  // const { addToDo } = useToDo();
   const [hour, setHour] = useState<string|undefined>('0');
   const [minute, setMinute] = useState<string|undefined>('0');
 

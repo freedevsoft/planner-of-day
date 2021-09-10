@@ -55,4 +55,4 @@ $ npm run dev
 ## Contact
 
 - GitHub [@freedevsoft](https://github.com/freedevsoft)
-- Gmail [@freedevsoft](mailTo:tkahn0430@gmail.com)
+- Gmail [@Michael](mailTo:tkahn0430@gmail.com)
