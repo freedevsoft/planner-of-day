@@ -1,13 +1,20 @@
 /* eslint-disable indent */
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { ReactSortable } from 'react-sortablejs';
 import { ToDoItemModel, useToDo, View } from '@components/context/context';
 import { ToDoItem } from '@components/common';
 import styles from './ToDoItems.module.css';
+import TimeAssign from '../TimeAssign';
 
-const ToDoItems: FC = () => {
-  const { toDoItems, view, clearToDoCompleted, sortToDoItems } = useToDo();
+interface Props {
+  onLoadData?: any;
+}
 
+const ToDoItems: FC<Props> = (props) => {
+  const { onLoadData } = props;
+  const { toDoItems, view, clearToDoCompleted, sortToDoItems, changeToDo } = useToDo();
+  onLoadData(toDoItems);
+  const [ data, setData ] = useState<ToDoItemModel>();
   const handleToDoToShow = useCallback(
     (value: View) => {
       switch (value) {
@@ -34,8 +41,14 @@ const ToDoItems: FC = () => {
 
   const toDoItemsToShow = handleToDoToShow(view);
 
-  const showItemsLeft = toDoItems.filter((toDoItem: ToDoItemModel) => toDoItem.isDone === false)
-    .length;
+  const showItemsLeft = toDoItems.filter((toDoItem: ToDoItemModel) => toDoItem.isDone === false).length;
+  
+  const handleChangeTime = (item: ToDoItemModel) => {
+    changeToDo(item);
+  }
+  const handleClickTimeAssign = ( toDo : ToDoItemModel) => {
+    setData(toDo);
+  }
   console.log(toDoItems);
   return (
     <>
@@ -49,7 +62,7 @@ const ToDoItems: FC = () => {
         className={`${styles.container} ${styles.scrollY} dark:bg-gray-800`}
       >
         {toDoItemsToShow.map((toDo: ToDoItemModel) => (
-          <ToDoItem key={toDo.id} toDo={toDo} />
+          <ToDoItem key={toDo.id} toDo={toDo} onTimeAssign={handleClickTimeAssign} />
         ))}
       </ReactSortable>
 
@@ -65,6 +78,7 @@ const ToDoItems: FC = () => {
         >
           clear completed
         </button>
+        <TimeAssign data={data} onClickSave={handleChangeTime} />
       </div>
     </>
   );

@@ -3,9 +3,9 @@ import { Context, createContext, FC, useContext, useMemo, useReducer } from 'rea
 
 export interface ToDoItemModel {
   id: number;
-  task: string;
-  isDone: boolean;
-  day: string;
+  task?: string;
+  isDone?: boolean;
+  day?: string;
   startTime: string;
   endTime: string;
 }
@@ -26,6 +26,7 @@ const initialState: ToDoState = {
 
 type Action =
   | { type: 'ADD_TO_DO_ITEM'; payload: ToDoItemModel }
+  | { type: 'CHANGE_TO_DO_ITEM'; payload: ToDoItemModel }
   | { type: 'CLEAR_TO_DO_COMPLETED' }
   | { type: 'DELETE_TO_DO_ITEM'; payload: number }
   | { type: 'SORT_TO_DO_ITEMS'; payload: ToDoItemModel[] }
@@ -41,7 +42,12 @@ const toDoReducer = (state: ToDoState, action: Action): ToDoState => {
         toDoItems: [action.payload, ...state.toDoItems],
       };
     }
-
+    case 'CHANGE_TO_DO_ITEM': {
+      return {
+        ...state,
+        toDoItems: [...state.toDoItems?.filter((toDoItem) => toDoItem.id !== action.payload.id), action.payload],
+      }
+    }
     case 'CLEAR_TO_DO_COMPLETED': {
       return {
         ...state,
@@ -102,6 +108,11 @@ const ToDoProvider: FC = (props) => {
       type: 'ADD_TO_DO_ITEM',
       payload: { id: new Date().getTime(), task: toDo, isDone: false, day: new Date().toString(), startTime: "", endTime: "" },
     });
+  const changeToDo = (item : ToDoItemModel): any =>
+    dispatch({
+      type: 'CHANGE_TO_DO_ITEM',
+      payload: item,
+    });
   const clearToDoCompleted = (): any => dispatch({ type: 'CLEAR_TO_DO_COMPLETED' });
   const deleteToDo = (id: number): void => dispatch({ type: 'DELETE_TO_DO_ITEM', payload: id });
   const sortToDoItems = (sortToDoItems: ToDoItemModel[]): any =>
@@ -114,6 +125,7 @@ const ToDoProvider: FC = (props) => {
     () => ({
       ...state,
       addToDo,
+      changeToDo,
       clearToDoCompleted,
       deleteToDo,
       sortToDoItems,

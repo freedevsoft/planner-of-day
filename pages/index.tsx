@@ -1,16 +1,20 @@
 import { FilterBar, Layout, Searchbar, ToDoItems } from '@components/common';
 import TimeBreakDown from '@components/common/TimeBreakDown';
+import { ToDoItemModel } from '@components/context/context';
+import { useState } from 'react';
 
 const Home = (): JSX.Element => {
+  const [toDoItems, setToDoItems] = useState<ToDoItemModel[]>([]);
+
   return (
     <>
       <div className="flex">
         <Searchbar className="flex-1" />
-        <TimeBreakDown />
+        <TimeBreakDown toDoItems={toDoItems} />
       </div>
       
 
-      <ToDoItems />
+      <ToDoItems onLoadData={setToDoItems} />
 
       <FilterBar />
 

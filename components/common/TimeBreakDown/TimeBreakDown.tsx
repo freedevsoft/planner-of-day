@@ -1,52 +1,61 @@
-import { ChangeEvent, FC, InputHTMLAttributes, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, FC, InputHTMLAttributes, KeyboardEvent, useEffect, useState } from 'react';
 import styles from './TimeBreakDown.module.css';
 import { Pie } from 'react-chartjs-2';
 import { ChartOptions } from 'chart.js'
+import { ToDoItemModel } from '@components/context/context';
+import { ToDoItems } from '..';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   id?: string;
+  toDoItems?: ToDoItemModel[];
 }
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-const Input: FC<Props> = (props) => {
 
-  const { className, id, ...rest } = props;
+const colors = ["#3d67ff","#ae53ea","#e93bca","#ff2da3","#ff407b","#ff6255","#ff8630","#ffa600"]
+const hoverColors = ["#4d77ff","#b268ef","#ed56d1","#ff4eab","#ff5a82","#ff765b","#ff9735","#ffb610"]
+
+const TimeBreakDown: FC<Props> = (props) => {
+
+  const { className, id, toDoItems, ...rest } = props;
   const toggleModal = (modalID : string) => {
     document.getElementById(modalID)?.classList.toggle("hidden");
     document.getElementById(modalID + "-backdrop")?.classList.toggle("hidden");
     document.getElementById(modalID)?.classList.toggle("flex");
     document.getElementById(modalID + "-backdrop")?.classList.toggle("flex");
   }
-  const data = {
-    labels: [
-      'Red',
-      'Green',
-      'Yellow'
-    ],
+  const [data, setData] = useState<(number|undefined)[]>([]);
+  const [labels, setLabels] = useState<(string|undefined)[]>([])
+  useEffect( () => {
+    if(toDoItems?.length)
+    {
+      // toDoItems.map( (item: ToDoItemModel) => {
+      //   if(item.startTime) {
+      //     setLabels([...labels, item.task]);
+      //     const startTime = parseInt(item.startTime.split(":")[0]) * 60 + parseInt(item.startTime.split(":")[1]);
+      //     const endTime = parseInt(item.endTime.split(":")[0]) * 60 + parseInt(item.endTime.split(":")[1]);
+      //     setData([...data, endTime - startTime]);
+      //   }
+      // })
+      setLabels(toDoItems.map((item: ToDoItemModel) : string | undefined => {
+        if(item.startTime) return item.task;
+      }).filter(item =>  item !== undefined));
+      setData(toDoItems.map((item: ToDoItemModel) : number | undefined => {
+        if(item.startTime) {
+          const startTime = parseInt(item.startTime.split(":")[0]) * 60 + parseInt(item.startTime.split(":")[1]);
+          const endTime = parseInt(item.endTime.split(":")[0]) * 60 + parseInt(item.endTime.split(":")[1]);
+          return endTime - startTime;
+        }
+      }).filter(item =>  item !== undefined))
+    }
+  }, [toDoItems, setLabels, setData])
+  console.log("chart data",toDoItems, {
+    labels: labels,
     datasets: [{
-      data: [300, 50, 100],
-      backgroundColor: [
-        '#FF6384',
-        '#36A2EB',
-        '#FFCE56'
-      ],
-      hoverBackgroundColor: [
-        '#FF7394',
-        '#46B2EB',
-        '#FFDE66'
-      ]
+      data: data,
+      backgroundColor: colors,
+      hoverBackgroundColor: hoverColors
     }]
-  };
-
+  });
   return (
     <div>
       <button
@@ -60,7 +69,7 @@ const Input: FC<Props> = (props) => {
       <div
         className="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
         id="modal-example-regular">
-        <div className="relative w-auto my-6 mx-auto max-w-3xl">
+        <div className="relative w-auto my-6 mx-auto max-w-4xl">
           
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             
@@ -78,7 +87,16 @@ const Input: FC<Props> = (props) => {
             </div>
             
             <div className="relative p-4 flex-auto">
-              <Pie data={data} />
+              <Pie
+                data={{
+                  labels: labels,
+                  datasets: [{
+                    data: data,
+                    backgroundColor: colors,
+                    hoverBackgroundColor: hoverColors
+                  }]
+                }}
+              />
             </div>
             
             <div className="flex items-center justify-end p-3 border-t border-solid border-gray-200 rounded-b">
@@ -96,4 +114,4 @@ const Input: FC<Props> = (props) => {
   );
 };
 
-export default Input;
+export default TimeBreakDown;
