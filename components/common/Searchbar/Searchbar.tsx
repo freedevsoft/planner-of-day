@@ -5,12 +5,13 @@ import styles from './Searchbar.module.css';
 
 interface Props {
   id?: string;
+  className?: string;
 }
 
-const Searchbar: FC<Props> = ({ id = 'search' }) => {
+const Searchbar: FC<Props> = ({ id = 'search', className }) => {
   return useMemo(
     () => (
-      <div className={`${styles.container} dark:bg-gray-800`}>
+      <div className={`${styles.container} ${className} dark:bg-gray-800`}>
         <button type="button" aria-label="Check Button - disabled" className={styles.checkButton}>
           <span>
             <CheckIcon className="invisible" />

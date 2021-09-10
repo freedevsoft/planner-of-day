@@ -1,24 +1,4 @@
-<h1 align="center">To Do App</h1>
-
-<div align="center">
-   Solution for a challenge from  <a href="https://www.frontendmentor.io" target="_blank">Frontendmentor.io</a>.
-</div>
-
-<div align="center">
-  <h3>
-    <a href="https://to-do-app-weld.vercel.app/" target="_blank" >
-      Demo
-    </a>
-    <span> | </span>
-    <a href="https://www.frontendmentor.io/profile/jcarlos0511" target="_blank" >
-      Solution
-    </a>
-    <span> | </span>
-    <a href="https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW" target="_blank" >
-      Challenge
-    </a>
-  </h3>
-</div>
+<h1 align="center">Planner for the Day</h1>
 
 <!-- TABLE OF CONTENTS -->
 
@@ -62,7 +42,7 @@
 
 ## Features
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), was created as a submission to a [Frontendmentor](https://www.frontendmentor.io/challenges) challenge. The [challenge](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW) was to build an application to complete the given user stories.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
 
 ## How To Use
 
@@ -70,7 +50,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/jcarlos0511/to-do-app.git
+$ git clone https://github.com/freedevsoft/planner-of-day.git
 
 # Enter the created folder
 $ cd to-do-app
@@ -95,5 +75,5 @@ $ npm run dev
 
 ## Contact
 
-- GitHub [@jcarlos0511](https://github.com/jcarlos0511)
-- Twitter [@charalopez0511](https://twitter.com/charalopez0511)
+- GitHub [@freedevsoft](https://github.com/freedevsoft)
+- Gmail [@freedevsoft](mailTo:tkahn0430@gmail.com)

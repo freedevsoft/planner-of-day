@@ -1,7 +1,6 @@
 import { MoonIcon, SunIcon } from '@components/icons';
 import { useToDo } from '@components/context/context';
 import styles from './Header.module.css';
-import TimeBreakDown from '../TimeBreakDown';
 
 const Header = (): JSX.Element => {
   const { darkMode, toggleDarkMode } = useToDo();
@@ -22,7 +21,7 @@ const Header = (): JSX.Element => {
 
       <div className={styles.content}>
         <h1 className={styles.title}>Plan List</h1>
-        <TimeBreakDown />
+        
         {/* <button
           type="button"
           aria-label="Toggle Button"

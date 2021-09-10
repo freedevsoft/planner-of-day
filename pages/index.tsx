@@ -1,9 +1,14 @@
 import { FilterBar, Layout, Searchbar, ToDoItems } from '@components/common';
+import TimeBreakDown from '@components/common/TimeBreakDown';
 
 const Home = (): JSX.Element => {
   return (
     <>
-      <Searchbar />
+      <div className="flex">
+        <Searchbar className="flex-1" />
+        <TimeBreakDown />
+      </div>
+      
 
       <ToDoItems />
 

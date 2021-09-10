@@ -1,5 +1,5 @@
 .container {
-  @apply bg-white flex p-4 rounded text-gray-300 focus-within:text-gray-600;
+  @apply bg-white flex p-2 rounded text-gray-300 focus-within:text-gray-600;
 }
 
 .checkButton {
